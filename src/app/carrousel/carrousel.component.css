@@ -1,5 +1,5 @@
 .conteudo{
-   height: 400px;  
+   height: 100vh;  
 }
 
 .carrousel{
@@ -12,7 +12,7 @@
 }
 
 .imgContainer{
-   min-width: 100%;  
+   min-width: 100%;   
    overflow: hidden;
    padding: 0;  
    transition: .4s    
@@ -30,6 +30,8 @@
    bottom: 0;
    right: 10px;
 }
+
+/*  estilização da progress bar */
 
 progress {
    border: 0;

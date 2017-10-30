@@ -11,7 +11,7 @@ export class CarrouselComponent implements OnInit {
   @ViewChild("img3Container") img3Container: ElementRef;
 
   posicao = 0;
-  tempoTransicao = 3000;
+  tempoTransicao = 5000;
   tempoImage1 = 0;
   tempoImage2 = 0;
   tempoImage3 = 0;
@@ -43,7 +43,6 @@ export class CarrouselComponent implements OnInit {
   }
 
   chargeBar(posicao: number): void {
-    console.log(posicao);
     if (posicao === 0) {
       this.chargeBar1();
     } else if (posicao === 1) {
