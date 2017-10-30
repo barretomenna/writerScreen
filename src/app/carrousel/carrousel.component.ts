@@ -11,6 +11,14 @@ export class CarrouselComponent implements OnInit {
   @ViewChild("img3Container") img3Container: ElementRef;
 
   posicao = 0;
+  tempoTransicao = 3000;
+  tempoImage1 = 0;
+  tempoImage2 = 0;
+  tempoImage3 = 0;
+  barra1: any;
+  barra2: any;
+  barra3: any;
+
 
   images = [
     'https://i.ytimg.com/vi/UvNnqWLruXA/maxresdefault.jpg',
@@ -22,15 +30,51 @@ export class CarrouselComponent implements OnInit {
   ngOnInit() {
     setInterval(() => {
       this.changeImage();
-    }, 3000);
+    }, this.tempoTransicao);
   }
 
   changeImage(): void {
     this.posicao = this.posicao === 3 ? 0 : this.posicao;
+    this.chargeBar(this.posicao);
     this.img1Container.nativeElement.style.left = `-${this.posicao * 100}%`;
     this.img2Container.nativeElement.style.left = `-${this.posicao * 100}%`;
     this.img3Container.nativeElement.style.left = `-${this.posicao * 100}%`;
     this.posicao++;
+  }
+
+  chargeBar(posicao: number): void {
+    console.log(posicao);
+    if (posicao === 0) {
+      this.chargeBar1();
+    } else if (posicao === 1) {
+      this.chargeBar2();
+    } else {
+      this.chargeBar3();
+    }
+  }
+
+  chargeBar1(): void {
+    this.tempoImage2 = 0;
+    this.tempoImage3 = 0;
+    clearInterval(this.barra2);
+    clearInterval(this.barra3);
+    this.barra1 = setInterval(() => { this.tempoImage1++; }, (this.tempoTransicao / 100));
+  }
+
+  chargeBar2(): void {
+    this.tempoImage1 = 0;
+    this.tempoImage3 = 0;
+    clearInterval(this.barra1);
+    clearInterval(this.barra3);
+    this.barra2 = setInterval(() => { this.tempoImage2++; }, (this.tempoTransicao / 100));
+  }
+
+  chargeBar3(): void {
+    this.tempoImage1 = 0;
+    this.tempoImage2 = 0;
+    clearInterval(this.barra1);
+    clearInterval(this.barra2);
+    this.barra3 = setInterval(() => { this.tempoImage3++; }, (this.tempoTransicao / 100));
   }
 
 }
