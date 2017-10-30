@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DrawComponent } from './draw/draw.component';
+import { CarrouselComponent } from './carrousel/carrousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DrawComponent
+    DrawComponent,
+    CarrouselComponent
   ],
   imports: [
     BrowserModule
