@@ -8,12 +8,13 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./draw.component.css']
 })
 export class DrawComponent implements AfterViewInit {
+
   // a reference to the canvas element from our template
   @ViewChild('canvas') public canvas: ElementRef;
 
   // setting a width and height for the canvas
-  @Input() public width = 300;
-  @Input() public height = 400;
+  @Input() public width = window.innerWidth;
+  @Input() public height = window.innerHeight;
 
   private cx: CanvasRenderingContext2D;
 

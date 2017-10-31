@@ -6,9 +6,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   styleUrls: ['./carrousel.component.css']
 })
 export class CarrouselComponent implements OnInit {
-  @ViewChild("img1Container") img1Container: ElementRef;
-  @ViewChild("img2Container") img2Container: ElementRef;
-  @ViewChild("img3Container") img3Container: ElementRef;
+  @ViewChild('img1Container') img1Container: ElementRef;
+  @ViewChild('img2Container') img2Container: ElementRef;
+  @ViewChild('img3Container') img3Container: ElementRef;
 
   posicao = 0;
   tempoTransicao = 5000;
@@ -22,7 +22,8 @@ export class CarrouselComponent implements OnInit {
 
   images = [
     'https://i.ytimg.com/vi/UvNnqWLruXA/maxresdefault.jpg',
-    'http://saladadecinema.com.br/wp-content/uploads/2017/10/ThorRagnarok.jpg'
+    'http://saladadecinema.com.br/wp-content/uploads/2017/10/ThorRagnarok.jpg',
+    'https://i0.wp.com/ovicio.com.br/wp-content/uploads/league-unite1.jpg?resize=820%2C431'
   ];
 
   constructor() { }
@@ -45,32 +46,34 @@ export class CarrouselComponent implements OnInit {
   chargeBar(posicao: number): void {
     if (posicao === 0) {
       this.chargeBar1();
-    } else if (posicao === 1) {
-      this.chargeBar2();
-    } else {
-      this.chargeBar3();
+      return null;
     }
+
+    if (posicao === 1) {
+      this.chargeBar2();
+      return null;
+    }
+
+    this.chargeBar3();
   }
 
+
   chargeBar1(): void {
-    this.tempoImage2 = 0;
-    this.tempoImage3 = 0;
+    this.tempoImage2 = this.tempoImage3 = 0;
     clearInterval(this.barra2);
     clearInterval(this.barra3);
     this.barra1 = setInterval(() => { this.tempoImage1++; }, (this.tempoTransicao / 100));
   }
 
   chargeBar2(): void {
-    this.tempoImage1 = 0;
-    this.tempoImage3 = 0;
+    this.tempoImage1 = this.tempoImage3 = 0;
     clearInterval(this.barra1);
     clearInterval(this.barra3);
     this.barra2 = setInterval(() => { this.tempoImage2++; }, (this.tempoTransicao / 100));
   }
 
   chargeBar3(): void {
-    this.tempoImage1 = 0;
-    this.tempoImage2 = 0;
+    this.tempoImage1 = this.tempoImage2 = 0;
     clearInterval(this.barra1);
     clearInterval(this.barra2);
     this.barra3 = setInterval(() => { this.tempoImage3++; }, (this.tempoTransicao / 100));

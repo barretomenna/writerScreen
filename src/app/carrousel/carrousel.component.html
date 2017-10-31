@@ -1,13 +1,13 @@
 <div class="conteudo">
   <div class="carrousel col-md-5" (click)="changeImage()">
     <div class="imgContainer col-md-12" #img1Container>
-      <img src={{images[0]}}>
+      <app-draw></app-draw>
     </div>
     <div class="imgContainer col-md-12" #img2Container>
       <img src={{images[1]}}>
     </div>
     <div class="imgContainer col-md-12" #img3Container>
-      <img src={{images[0]}}>
+      <img src={{images[2]}}>
     </div>
     <div class="indicador">
       <progress max="100" value={{tempoImage1}}></progress>
