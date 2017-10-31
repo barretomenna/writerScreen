@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -13,8 +13,8 @@ export class DrawComponent implements AfterViewInit {
   @ViewChild('canvas') public canvas: ElementRef;
 
   // setting a width and height for the canvas
-  @Input() public width = window.innerWidth;
-  @Input() public height = window.innerHeight;
+  public width = window.innerWidth;
+  public height = window.innerHeight;
 
   private cx: CanvasRenderingContext2D;
 
