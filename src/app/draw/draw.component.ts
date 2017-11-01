@@ -1,5 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-
+import { Component, AfterViewInit, ViewChild, ElementRef, Output, Input, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -9,16 +8,23 @@ import { Observable } from 'rxjs/Rx';
 })
 export class DrawComponent implements AfterViewInit {
 
+  @Input() onSave: any;
   // a reference to the canvas element from our template
   @ViewChild('canvas') public canvas: ElementRef;
+  @Output() imageOutput = 'teste';
+
 
   // setting a width and height for the canvas
   public width = window.innerWidth;
   public height = window.innerHeight;
+  image: string;
+
 
   private cx: CanvasRenderingContext2D;
 
-  constructor() { }
+  constructor() {
+    console.log();
+  }
 
   ngAfterViewInit(): void {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
@@ -54,6 +60,7 @@ export class DrawComponent implements AfterViewInit {
 
       const mouseEvent = new MouseEvent('mouseup', {});
       canvas.dispatchEvent(mouseEvent);
+      this.takeScreenshot();
     }, false);
 
     // pega o status de move do touch e converte para move do mouse
@@ -131,14 +138,11 @@ export class DrawComponent implements AfterViewInit {
     }
   }
 
-  takeScreenshot() {
+  public takeScreenshot() {
     const canvas = this.canvas.nativeElement;
     const imageData = canvas.toDataURL();
-    const myImage = new Image();
-    const myWindows = window.open('', '', 'width=335,height=330,resizable=1');
 
-    myImage.src = imageData;
-
-    alert(imageData);
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, this.width, this.height);
   }
 }
