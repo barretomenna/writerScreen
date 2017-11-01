@@ -130,4 +130,15 @@ export class DrawComponent implements AfterViewInit {
       this.cx.stroke();
     }
   }
+
+  takeScreenshot() {
+    const canvas = this.canvas.nativeElement;
+    const imageData = canvas.toDataURL();
+    const myImage = new Image();
+    const myWindows = window.open('', '', 'width=335,height=330,resizable=1');
+
+    myImage.src = imageData;
+
+    alert(imageData);
+  }
 }
