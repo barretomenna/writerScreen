@@ -8,10 +8,11 @@ import { Observable } from 'rxjs/Rx';
 })
 export class DrawComponent implements AfterViewInit {
 
-  @Input() onSave: any;
+  @Input() onSave: Function;
   // a reference to the canvas element from our template
   @ViewChild('canvas') public canvas: ElementRef;
-  @Output() imageOutput = 'teste';
+  @Output() imageOutput: EventEmitter<any> = new EventEmitter;
+  teste: HTMLCanvasElement;
 
 
   // setting a width and height for the canvas
@@ -24,6 +25,11 @@ export class DrawComponent implements AfterViewInit {
 
   constructor() {
     console.log();
+    this.imageOutput.emit('teste');
+  }
+
+  testando() {
+    console.log('clicou');
   }
 
   ngAfterViewInit(): void {
@@ -39,7 +45,8 @@ export class DrawComponent implements AfterViewInit {
     this.cx.lineCap = 'round';
     this.cx.strokeStyle = '#000';
 
-    // we'll implement this method to start capturing mouse events
+    // we'll implement this method to start capturing mouse events  
+    this.verificarOrientacaoDaTela();
     this.touchMove(canvasEl);
     this.captureEvents(canvasEl);
   }
@@ -114,6 +121,9 @@ export class DrawComponent implements AfterViewInit {
           y: res[1].clientY - rect.top
         };
 
+        if (currentPos.x < prevPos.x) {
+          console.log('arrastou para esquerda');
+        }
         // this method we'll implement soon to do the actual drawing
         this.drawOnCanvas(prevPos, currentPos);
       });
@@ -138,11 +148,22 @@ export class DrawComponent implements AfterViewInit {
     }
   }
 
-  public takeScreenshot() {
+  takeScreenshot() {
     const canvas = this.canvas.nativeElement;
     const imageData = canvas.toDataURL();
+
+    this.imageOutput.emit(imageData);
 
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, this.width, this.height);
   }
+
+  private verificarOrientacaoDaTela() {
+    const canvas = this.canvas.nativeElement;
+    window.addEventListener('orientationchange', () => {
+      canvas.height = screen.height;
+      canvas.width = screen.width;
+    });
+  }
+
 }

@@ -1,7 +1,8 @@
 <div class="conteudo">
-  <div class="carrousel col-md-5" (click)="changeImage()">
+  <div class="carrousel col-md-5" (touchstart)="setInitialPosition($event)" (touchend)='slide($event)'>
     <div class="imgContainer col-md-12" #img1Container>
-      <app-draw></app-draw>
+      <img src={{images[0]}}>
+
     </div>
     <div class="imgContainer col-md-12" #img2Container>
       <img src={{images[1]}}>

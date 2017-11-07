@@ -1,4 +1,5 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +7,38 @@ import { Component, OnInit, } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
   imageData: string;
   verificador;
+  posicaoInicial: number;
 
-  ngOnInit(): void {
+  @ViewChild('meu') meu: HTMLElement;
 
+  ngAfterViewInit(): void {
   }
 
   renderImage(ev): void {
-    console.log(ev, 'teste');
+    this.imageData = ev;
   }
+
+  closeScreen() {
+    console.log('fechou');
+  }
+
+  testando2(ev: PointerEvent) {
+    this.posicaoInicial = ev.clientX;
+  }
+
+  testando(ev: PointerEvent) {
+    if (this.posicaoInicial > ev.clientX) {
+      alert('esquerda');
+      return null;
+    }
+
+    if (this.posicaoInicial < ev.clientX) {
+      alert('direita');
+      return null;
+    }
+  }
+
 }
